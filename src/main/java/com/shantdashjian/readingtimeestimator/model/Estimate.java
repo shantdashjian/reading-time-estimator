@@ -14,6 +14,7 @@ public class Estimate {
     }
 
     public Estimate() {
+        wpm = DEFAULT_WPM;
     }
 
     public Estimate(String text, Integer wpm, Integer estimate) {
@@ -23,7 +24,8 @@ public class Estimate {
     }
 
     public Estimate(String text) {
-        this(text, DEFAULT_WPM);
+        this.text = text;
+        this.wpm = DEFAULT_WPM;
     }
 
     public void setEstimate(Integer estimate) {
@@ -44,7 +46,9 @@ public class Estimate {
     }
 
     public void setWpm(Integer wpm) {
-        this.wpm = wpm;
+        if (wpm != null) {
+            this.wpm = wpm;
+        }
     }
 
 

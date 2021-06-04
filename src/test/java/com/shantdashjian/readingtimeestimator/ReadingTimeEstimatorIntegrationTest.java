@@ -36,4 +36,20 @@ public class ReadingTimeEstimatorIntegrationTest {
         assertThat(result.getBody().getEstimate()).isEqualTo(1);
 
     }
+
+    @Test
+    void testEstimator_returns_estimate_1_when_I_send_text_two_words() {
+        // arrange
+        String text = "Two words";
+        Estimate estimate = new Estimate(text);
+
+        // act
+        ResponseEntity<Estimate> result = restTemplate.postForEntity("http://localhost:" + port + "/estimate", estimate,
+                Estimate.class);
+
+        // assess
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(result.getBody().getEstimate()).isEqualTo(1);
+
+    }
 }

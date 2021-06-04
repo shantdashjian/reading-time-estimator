@@ -47,6 +47,27 @@ public class EstimatorControllerTest {
         verify(service, times(1)).calculateEstimate(any(Estimate.class));
     }
 
+    @Test
+    void returns_estimate_1_when_posting_text_Two_words() throws Exception {
+        // arrange
+        String text = "Two words";
+        Estimate estimateObject = new Estimate(text);
+
+        when(service.calculateEstimate(any(Estimate.class))).thenReturn(new Estimate(text, 106, 1));
+
+        // act
+        // assess
+        mockMvc.perform(post("/estimate")
+                .content(asJsonString(estimateObject))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.estimate").value("1"));
+        verify(service, times(1)).calculateEstimate(any(Estimate.class));
+    }
+
     private static String asJsonString(Object object) {
         try {
             return new ObjectMapper().writeValueAsString(object);
