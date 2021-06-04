@@ -30,12 +30,12 @@ public class EstimatorControllerTest {
         // arrange
         String text = "Two words";
         Integer wpm = 106;
-        Integer estimate = 0;
-        Estimate estimateObject = new Estimate(text, wpm, estimate);
+        Estimate estimateObject = new Estimate(text, wpm);
 
         when(service.calculateEstimate(any(Estimate.class))).thenReturn(new Estimate(text, wpm, 1));
 
         // act
+        // assess
         mockMvc.perform(post("/estimate")
                 .content(asJsonString(estimateObject))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -44,7 +44,6 @@ public class EstimatorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.estimate").value("1"));
-        // assess
         verify(service, times(1)).calculateEstimate(any(Estimate.class));
     }
 

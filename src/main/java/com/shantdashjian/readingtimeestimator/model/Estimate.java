@@ -2,6 +2,8 @@ package com.shantdashjian.readingtimeestimator.model;
 
 public class Estimate {
 
+    private static final Integer DEFAULT_WPM = 106;
+
     private String text;
     private Integer wpm;
     private Integer estimate;
@@ -18,6 +20,10 @@ public class Estimate {
         this.text = text;
         this.wpm = wpm;
         this.estimate = estimate;
+    }
+
+    public Estimate(String text) {
+        this(text, DEFAULT_WPM);
     }
 
     public void setEstimate(Integer estimate) {

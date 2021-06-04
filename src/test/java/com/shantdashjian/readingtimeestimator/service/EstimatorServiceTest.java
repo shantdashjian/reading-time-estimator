@@ -43,4 +43,17 @@ class EstimatorServiceTest {
         // assess
         assertThat(result.getEstimate()).isEqualTo(2);
     }
+
+    @Test
+    void returns_estimate_1_when_posting_text_Two_words() throws Exception {
+        // arrange
+        String text = "Two words";
+        Estimate estimateObject = new Estimate(text);
+
+        // act
+        Estimate result = service.calculateEstimate(estimateObject);
+
+        // assess
+        assertThat(result.getEstimate()).isEqualTo(1);
+    }
 }
